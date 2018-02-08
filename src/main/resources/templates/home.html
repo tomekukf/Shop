@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>TimeDAta</title>
+</head>
+<body>
+
+<br>
+<div >
+    <h2 th:if="${registerMessage}" th:text="${registerMessage}"></h2>
+</div>
+<h1>All products in shop</h1>
+<table border="1" cellpadding="12">
+<tr>
+<th>Name</th>
+<th>Brand</th>
+<th>Price</th>
+<th>Description</th>
+<th>User</th>
+
+
+
+</tr>	
+<tr th:each="product : ${products}" th:object="${product}">
+<td th:text="*{name}">Name</td>
+<td th:text="*{brand}">Brand</td>
+<td th:text="*{price}">Price</td>
+<td th:text="*{description}">Description</td>
+<td th:text="*{user}">UserID</td>
+
+
+</tr>
+
+
+
+</table><br><Br>
+<a th:href="@{/register}">Register</a>
+<br>
+<!-- <form action="#" method="post" th:action="@{/register}">
+<input type="submit" value="Register">
+</form>
+ -->
