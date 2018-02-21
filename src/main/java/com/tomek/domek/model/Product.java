@@ -1,8 +1,5 @@
 package com.tomek.domek.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -23,7 +20,7 @@ public class Product {
 	private Long id;
 	
 	@NotEmpty
-	private String name;
+	private String category;
 
 	private String brand;
 	@NotNull
@@ -37,17 +34,64 @@ public class Product {
 	private User user;
 	
 
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private Photo photoKey;
+	
+
+	private String adress;
+
 	
 	
 
-	public Product(@NotEmpty String name, String brand, @NotNull double price, String description, User user) {
+
+	public Photo getPhotoKey() {
+		return photoKey;
+	}
+
+
+
+
+
+	public void setPhotoKey(Photo photoKey) {
+		this.photoKey = photoKey;
+	}
+
+
+
+
+
+	public Product(@NotEmpty String category, String brand, @NotNull double price, String description, User user,Photo photoKey,String adress) {
 		super();
-		this.name = name;
+		this.category = category;
 		this.brand = brand;
 		this.price = price;
 		this.description = description;
 		this.user = user;
+		this.photoKey = photoKey;
+		this.adress=adress;
+	
 	}
+	
+
+
+
+
+
+
+
+
+	public String getAdress() {
+		return adress;
+	}
+
+
+
+
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
+
 
 
 
@@ -61,12 +105,26 @@ public class Product {
 
 	
 
-	public String getName() {
-		return name;
+	public Long getId() {
+		return id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String name) {
+		this.category = name;
 	}
 
 	public String getBrand() {
@@ -104,7 +162,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", brand=" + brand + ", price=" + price + ", description="
+		return "Product [id=" + id + ", category=" + category + ", brand=" + brand + ", price=" + price + ", description="
 				+ description + "]";
 	}
 	

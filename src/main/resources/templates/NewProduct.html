@@ -3,28 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="../static/css/styles.css" type="text/css" rel="stylesheet">
+<link href="../static/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
 </head>
 <body>
+	<div th:replace="fragments/header :: header">Header</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="container form-group-sm">
+		<form action="#" method="post" th:object="${product}"
+			th:action="@{/addProduct}" enctype="multipart/form-data">
+			<p th:errors="*{category}">Category error</p>
 
-<br>
-<form action="#" method="post" th:object="${product}" th:action="@{/addProduct}">
-<p th:errors="*{name}">Name error</p>
-<p>Name : <input type="text"  th:field="*{name}"/></p>
-<p>Brand : <input type="text"  th:field="*{brand}"/></p>
-<p th:errors="*{price}">Price Errors Error</p>
-<p>Price : <input type="number"  th:field="*{price}"/></p>
+<!-- 			Category : <input type="text" th:field="*{name}" /> -->
+			
+			<p> Category: 
+			 <select
+				th:field="*{category}">
+				<option th:each="dropdownValue: ${categoryValues}"
+					th:value="${dropdownValue}" 
+					th:text="${dropdownValue}">
+					</option>
+			</select></p> <br>
 
-<p>Description  : <input type="text"  th:field="*{description}"/></p>
+			<p>
+				<br> Brand : <select th:field="*{brand}">
+				<option th:each="brandVal : ${brandValues}"
+				th:value="${brandVal}"	
+				th:text="${brandVal}">
+				
+				</option>
+				
+				</select>
+			</p>
+			<p th:errors="*{price}">Price Errors Error</p>
+			<p>
+				Price : <input type="number" th:field="*{price}" />
+			</p>
 
-<p><input type="submit" value="addProduct"/></p>
-<br>
-<br>
+			<p>
+				Description : <input type="text" th:field="*{description}" />
+			</p>
+
+			<p>
+				Photo : <input type="file" name="file" />
+			</p>
+			<br>
+
+			<p>
+				<input type="submit" value="addProduct" />
+			</p>
+			<br> <br>
 
 
 
 
-</form><br>
-<a th:href="@{/}">Home page</a>
+		</form>
+		<br>
+	</div>
+	<a th:href="@{/}">Home page</a>
+	<div th:replace="fragments/footer :: footer">...</div>
+
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
 
 
 </body>
