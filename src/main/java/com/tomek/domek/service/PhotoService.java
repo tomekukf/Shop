@@ -42,9 +42,11 @@ public class PhotoService {
 		Photo photo = photoRepository.findByPhotoKey(path);
 		byte[] media;
 		if(photo.getPhoto() != null ) {
+			System.out.println("jest foto");
 		 media= photo.getPhoto();
 		}else {
 			media=null;
+			System.out.println("brak zdjecia");
 		}
 		 
 		

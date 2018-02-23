@@ -34,8 +34,8 @@ import com.tomek.domek.service.ProductService;
 @Controller
 public class ProductController {
 
-	private static String uploadPath = "/Shop/src/main/resources/photos/";
-	private static final String uploadPath1 = "C:\\Users\\Tomek\\Desktop\\Java 2018\\Workbench\\Shop\\src\\main\\resources\\photos\\";
+//	private static String uploadPath = "/Shop/src/main/resources/photos/";
+//	private static final String uploadPath1 = "C:\\Users\\Tomek\\Desktop\\Java 2018\\Workbench\\Shop\\src\\main\\resources\\photos\\";
 
 	@Autowired
 	private ProductService productService;
@@ -79,7 +79,7 @@ public class ProductController {
 
 	@ModelAttribute(name = "categoryValues")
 	public String[] categoriesValues() {
-		return new String[] { "sukienka", "spodnie", "czapka" };
+		return new String[] { "Sukienka", "Spodnie", "Czapka" };
 
 	}
 	@ModelAttribute(name="brandValues")

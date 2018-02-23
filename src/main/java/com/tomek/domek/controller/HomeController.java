@@ -1,10 +1,12 @@
 package com.tomek.domek.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,10 +19,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tomek.domek.model.User;
 import com.tomek.domek.repository.PhotoRepository;
+import com.tomek.domek.repository.ProductRepository;
 import com.tomek.domek.service.PhotoService;
 import com.tomek.domek.service.ProductService;
 import com.tomek.domek.service.UserService;
@@ -40,12 +44,19 @@ public class HomeController {
 	@Autowired
 	private PhotoRepository photoRepository;
 	
+	@Autowired
+	private ProductRepository productRepo;
 	
 	
 
 	@RequestMapping("/")
-	public String getHome(Model model, @ModelAttribute("message") String message) {
-		model.addAttribute("products", productService.getAll());
+	public String getHome(Model model,
+			@RequestParam(defaultValue="0")int page,
+			@RequestParam(defaultValue="5")int size,
+			
+			@ModelAttribute("message") String message) {
+		model.addAttribute("products", productRepo.findAll(PageRequest.of(page, size)));
+		model.addAttribute("currentPage", page);
 		return "home";
 	}
 	
@@ -57,6 +68,8 @@ public class HomeController {
 
 		byte[] media = photoService.getPhotoFromDB(id);
 
+		
+//		File nowe = new File("0_czapka.jpg");
 		HttpHeaders headers = new HttpHeaders();
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 
@@ -88,7 +101,11 @@ public class HomeController {
 		return "home";
 	}
 	
-	
-	
+	@RequestMapping("/test")
+	public String test(Model model) {
+		
+		return "test";
+		
+	}
 
 }

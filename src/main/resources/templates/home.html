@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Sth</title>
+<title>Shop application</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../static/css/styles.css" type="text/css" rel="stylesheet">
-<link href="../static/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link rel="stylesheet"  type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}" />
 </head>
 <body>
+<div>
+
+</div>
 	<div th:replace="fragments/header :: header">...</div>
-	<!-- <img th:src="${photos/zebra.jpg}" class="empPhoto"  src="photos/zebra.jpg"/> -->
 	<br>
 	<div>
 		<h2 th:if="${registerMessage}" th:text="${registerMessage}"></h2>
@@ -20,15 +20,13 @@
 	</div>
 	<br>
 	<br>
-	<div align="center">
-		<img th:src="@{zebra.jpg}" height="50" align="middle" />
-	</div>
+	
 
 
 
 
 	<br>
-	<h1 class="container">All products in shop</h1>
+	<h1 class="container ">All products in shop</h1>
 	<div class="container">
 
 		<table class="table table-bordered tab-content" cellpadding="12">
@@ -44,9 +42,9 @@
 
 			</tr>
 			<tr th:each="product : ${products}" th:object="${product}">
-				<td align="center"><a th:href="@{/{id}(id=${product.adress})}"> <img
-						alt="Image" th:src="@{/{id}(id=${product.adress})}" width="100"
-						height="100" align="middle" />
+				<td align="center"><a th:href="@{/{id}(id=${product.adress})}">
+						<img alt="Image" th:src="@{/{id}(id=${product.adress})}"
+						width="100" height="100" align="middle" />
 				</a></td>
 				<td th:text="*{category}"></td>
 				<td th:text="*{brand}">Brand</td>
@@ -59,6 +57,18 @@
 
 
 		</table>
+ 	
+		<ul class="nav nav-pills">
+			<li class="nav-tabs"
+				th:each=" number : ${#numbers.sequence(0,products.totalPages-1)}">
+				<a th:href="@{/(page=${number})}" th:text="${number}" class="nav-link"
+				th:classappend="${currentPage}==${number}?'active':''"
+				></a>
+
+			</li>
+
+		</ul>
+
 	</div>
 	<br>
 	<Br>
@@ -67,10 +77,8 @@
 
 	<div class="container" th:replace="fragments/footer :: footer">...</div>
 
-	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script type="text/javascript" src="../static/js/bootstrap.js">
-	</script>
+	<script src="/jquery/jquery/3.2.1.min.js"></script>    
+<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
 </body>
 <!-- <form action="#" method="post" th:action="@{/register}">
 <input type="submit" value="Register">

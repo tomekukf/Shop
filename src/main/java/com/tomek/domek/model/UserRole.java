@@ -1,9 +1,12 @@
 package com.tomek.domek.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class UserRole {
@@ -15,6 +18,12 @@ public class UserRole {
 	private String role;
 	
 	private String description;
+	
+	
+
+
+	@ManyToMany(mappedBy="roles")
+	private List<User> users;
 
 	
 	
@@ -44,6 +53,20 @@ public class UserRole {
 	public UserRole() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public UserRole(String role, String description, List<User> users) {
+		super();
+		this.role = role;
+		this.description = description;
+		this.users = users;
 	}
 	
 	

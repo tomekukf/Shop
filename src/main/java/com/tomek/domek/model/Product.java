@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Product {
 
@@ -27,6 +29,8 @@ public class Product {
 	private double price;
 
 	private String description;
+	
+	private String Date;
 
 	
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)

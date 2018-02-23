@@ -3,12 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"  th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css"  />
+<link rel="stylesheet"  th:href="@{/syles.css}" />
+<link >
+
+
 </head>
 <body>
 <h1>Registration form</h1>
-<form action="#" method="post" th:action="@{/register}" th:object="${user}">
-<input th:field="*{name}" placeholder="Name">
-<input th:field="*{surname}" placeholder="Surname">
+<div class="container col-lg-pull-11">
+	<div class="" th:replace="fragments/header :: header">...</div>
+	<div class="myOwn">
+	<h1 class="alert">siiema</h1></div>
+	
+<div   class=" container form-group">
+<form class=" " action="#" method="post" th:action="@{/register}" th:object="${user}">
+<input class="" th:field="*{name}" placeholder="Name">
+<br>
+<br>
+<input class="" th:field="*{surname}" placeholder="Surname">
 
 <p th:errors="*{username}">Username Error</p>
 <input th:field="*{username}" placeholder="Username" >
@@ -18,11 +31,14 @@
 <input type="password" th:field="*{password}" placeholder="password"><br><br>
 <input type="submit" value="Send">
 </form>
+</div>
 
 
 
 
-
-
+<div class="container" th:replace="fragments/footer :: footer">...</div>
+</div>
+<script src="/jquery/jquery/3.2.1.min.js"></script>    
+<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
 </body>
 </html>

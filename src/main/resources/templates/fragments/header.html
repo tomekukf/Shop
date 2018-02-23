@@ -5,9 +5,7 @@
 <title>Header</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../static/css/styles.css" type="text/css" rel="stylesheet">
-<link href="../static/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link rel="stylesheet" th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}" />
 
 </head>
 <body>
@@ -15,7 +13,7 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top ">
 			<div class="container">
 				<a th:href="@{/}" class="navbar-brand"> <img
-					src="../static/photos/zebra.jpg" align="left" border="1px"
+					th:src="@{/photos/zebra.jpg}" align="left" border="1px"
 					width="50px" height="50" />
 				</a>
 				<!-- 			<img src="../static/photos/zebra.jpg" align="left" border="1px" width="100px" height=""/> -->
@@ -36,9 +34,8 @@
 		</nav>
 
 	</div>
-	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+<script src="/jquery/jquery/3.2.1.min.js"></script>    
+<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
 
 </body>
 </html>

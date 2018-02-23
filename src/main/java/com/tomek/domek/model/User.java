@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
@@ -30,18 +33,23 @@ public class User {
 	private String name;
 	private String surname;
 
+	
+
 	@NotNull
-	@Size(min = 4, max = 10)
+	@Size(min = 5)
 	private String password;
 
 	@NotNull
 	@Email
+	@Column(unique=true)
 	private String email;
 
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name="USER_ROLES", joinColumns= {@JoinColumn(name="USER_ID", referencedColumnName="id")}, 
+	inverseJoinColumns= {@JoinColumn(name="ROLE_ID",referencedColumnName="id")})
 	private Set<UserRole> roles = new HashSet<>();
 
-	@OneToMany(mappedBy = "user",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Product> products;
 
 	
@@ -55,7 +63,28 @@ public class User {
 		this.password = password;
 		this.email = email;
 	}
+	public User(@NotEmpty String username, String name, String surname, @NotNull @Size(min = 5) String password,
+			@NotNull @Email String email, List<Product> products) {
+		super();
+		this.username = username;
+		this.name = name;
+		this.surname = surname;
+		this.password = password;
+		this.email = email;
+		this.products = products;
+	}
 
+	public User(@NotEmpty String username, String name, String surname, @NotNull @Size(min = 5) String password,
+			@NotNull @Email String email, Set<UserRole> roles, List<Product> products) {
+		super();
+		this.username = username;
+		this.name = name;
+		this.surname = surname;
+		this.password = password;
+		this.email = email;
+		this.roles = roles;
+		this.products = products;
+	}
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
