@@ -11,22 +11,22 @@ import com.tomek.domek.model.Product;
 import com.tomek.domek.repository.ProductRepository;
 
 @SpringBootApplication
-public class ShopApplication implements CommandLineRunner {
+public class ShopApplication  {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(ShopApplication.class, args);
 
-	}
+	}}
 
-	@Autowired
-	private ProductRepository productRepository;
+//	@Autowired
+//	private ProductRepository productRepository;
 
-	@Override
-	public void run(String... args) throws Exception {
-		
+//	@Override
+//	public void run(String... args) throws Exception {
+//		
 //		productRepository.save(new Product("Sukienka", "HM", 99.0, "opis", null,  new Photo("_DSC0444.jpg",  null, null), "_DSC0444.jpg"));
 //		productRepository.save(new Product("Spodnie", "HM", 99.0, "opis", null,  new Photo("_DSC0444.jpg",  null, null), "_DSC0444.jpg"));
 //		productRepository.save(new Product("Sukienka", "Reserved", 99.0, "opis", null,  new Photo("_DSC0444.jpg",  null, null), "_DSC0444.jpg"));
-	}
-
-}
+//	}
+//
+//}

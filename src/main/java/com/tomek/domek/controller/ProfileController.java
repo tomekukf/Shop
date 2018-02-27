@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tomek.domek.model.User;
 import com.tomek.domek.service.ProductService;
@@ -33,6 +35,18 @@ public class ProfileController {
 		
 		return "views/profile";
 	
+	}
+	
+	
+	
+	@ResponseBody
+	@GetMapping("/users/{user}")
+	public String showUser(@PathVariable String user, Model model) {
+
+		User user1 = userService.getUserByUsername(user);
+		model.addAttribute("user", user1);
+
+		return "messae" + user1;
 	}
 	
 

@@ -4,33 +4,25 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
+import java.security.Principal;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.CacheControl;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tomek.domek.model.Product;
-import com.tomek.domek.model.User;
+import com.tomek.domek.repository.ProductRepository;
 import com.tomek.domek.repository.UserRepository;
 import com.tomek.domek.service.PhotoService;
 import com.tomek.domek.service.ProductService;
@@ -54,10 +46,13 @@ public class ProductController {
 	private ServletContext servletContext;
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private ProductRepository productRepo;
 
 	@PostMapping("/addProduct")
 	public String addProduct(Model model, @Valid @ModelAttribute(name = "product") Product product,
-			@RequestAttribute("file") MultipartFile file, RedirectAttributes atr, BindingResult results)
+			@RequestAttribute("file") MultipartFile file, RedirectAttributes atr, BindingResult results,Principal principal)
 			throws IOException {
 
 		if (results.hasErrors()) {
@@ -65,9 +60,10 @@ public class ProductController {
 		} else {
 
 			byte[] bytes = file.getBytes();
+			String email= principal.getName();
 
-			productService.addProduct(product, file.getOriginalFilename(), bytes,
-					userRepo.findByEmail("tomek.ukf@gmail.com"));
+			productService.addProduct(product, file.getOriginalFilename(), bytes,email);
+					
 
 			String key = photoService.takeKeyofProductPhoto(product);
 			Path path = Paths.get(uploadPath1 + key);
@@ -86,6 +82,10 @@ public class ProductController {
 		model.addAttribute("product", new Product());
 		return "NewProduct";
 	}
+	
+	
+	
+	
 
 	@ModelAttribute(name = "categoryValues")
 	public String[] categoriesValues() {
@@ -97,6 +97,21 @@ public class ProductController {
 	public String[] brandValues() {
 		return new String[] { "HM", "Bershka", "Stradivarius", "Reserved" };
 
+	}
+	
+	
+	
+	
+	@RequestMapping("/orderByPrice")
+	public String getAllOrderByPrice(Model model, @ModelAttribute("message") String message) {
+		model.addAttribute("products", productRepo.findAllByOrderByBrandAsc());
+		return "home";
+	}
+
+	@RequestMapping("/orderByBrand")
+	public String getAllOrderByBrand(Model model, @ModelAttribute("message") String message) {
+		model.addAttribute("products", productService.getAllAndOrderByBrand());
+		return "home";
 	}
 
 }

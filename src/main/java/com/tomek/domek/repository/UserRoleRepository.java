@@ -10,4 +10,6 @@ public interface UserRoleRepository extends JpaRepository<UserRole, Long> {
 
 	
 	 Set<UserRole> findByRole(String role);
+	 
+	 
 }

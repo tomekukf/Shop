@@ -34,18 +34,7 @@ import com.tomek.domek.service.UserService;
 @Controller
 public class HomeController {
 
-	@Autowired
-	private ProductService productService;
-	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private PhotoService photoService;
-	@Autowired
-	private ServletContext servletContext;
-	@Autowired
-	private PhotoRepository photoRepository;
-
+	
 	@Autowired
 	private ProductRepository productRepo;
 
@@ -59,68 +48,16 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/lol/{photoID}/lol", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-	public @ResponseBody ResponseEntity<byte[]> getImageAsResponseEntity(@PathVariable String photoID)
-			throws IOException {
-		System.out.println(photoID+"lolllll");
-		byte[] media = photoService.getPhotoFromDB(photoID);
-
-		// File nowe = new File("0_czapka.jpg");
-		HttpHeaders headers = new HttpHeaders();
-		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-
-		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
-		return responseEntity;
-	}
-
-	@RequestMapping(value = "/users/{userProducts}/users", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-	public @ResponseBody ResponseEntity<byte[]> getImageAsResponseEntityy(@ModelAttribute User userProducts)
-			throws IOException {
-
-		List<Product> list = userProducts.getProducts();
-		System.out.println(list);
-		for (Product product : list) {
-			System.out.println(product);
+	
+	@GetMapping("/login")
+		public String showLoginForm() {
+			
+		return "views/loginForm";
 		}
-//		Optional<Product> product = productService.findByUserid(userProducts);
-//		List<Product> product = productService.findByUserid(userProducts);
-		String  pathname="3_czapka.jpg";
-		byte[] photo = photoService.getPhotoFromDB(pathname);
+	
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+	
 
-		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(photo, headers, HttpStatus.OK);
-		return responseEntity;
-	}
 
-	@ResponseBody
-	@GetMapping("/users/{user}")
-	public String showUser(@PathVariable String user, Model model) {
-
-		User user1 = userService.getUserByUsername(user);
-		model.addAttribute("user", user1);
-
-		return "messae" + user1;
-	}
-
-	@RequestMapping("/orderByPrice")
-	public String getAllOrderByPrice(Model model, @ModelAttribute("message") String message) {
-		model.addAttribute("products", productRepo.findAllByOrderByBrandAsc());
-		return "home";
-	}
-
-	@RequestMapping("/orderByBrand")
-	public String getAllOrderByBrand(Model model, @ModelAttribute("message") String message) {
-		model.addAttribute("products", productService.getAllAndOrderByBrand());
-		return "home";
-	}
-
-	@RequestMapping("/test")
-	public String test(Model model) {
-
-		return "test";
-
-	}
 
 }

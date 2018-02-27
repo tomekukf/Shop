@@ -1,5 +1,6 @@
 package com.tomek.domek.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -20,9 +21,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class User {
+public class User  implements Serializable {
 
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long id;
 
@@ -44,8 +45,8 @@ public class User {
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "USER_ROLES", joinColumns = {
-			@JoinColumn(name = "USER_ID", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "ROLE_ID", referencedColumnName = "id") })
+			@JoinColumn(name = "USER_EMAIL", referencedColumnName = "email") }, inverseJoinColumns = {
+					@JoinColumn(name = "ROLE_NAME", referencedColumnName = "role") })
 	private Set<UserRole> roles ;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

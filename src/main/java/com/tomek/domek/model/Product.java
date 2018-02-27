@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotEmpty
@@ -39,7 +39,7 @@ public class Product {
 
 
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn(name="userID")
+	@JoinColumn(name="user_EMAIL")
 	private User user;
 	
 

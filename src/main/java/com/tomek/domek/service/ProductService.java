@@ -1,8 +1,8 @@
 package com.tomek.domek.service;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,9 +33,9 @@ public class ProductService {
 
 	public String photoAdress;
 
-	public void addProduct(Product product, String name, byte[] file, User user) {
+	public void addProduct(Product product, String name, byte[] file, String email) {
 		// User user = userRepository.findByUsername(defaultUser);
-
+		User user = userRepository.findByEmail(email);
 		product.setDate(getCurrentTimeUsingCalendar());
 		product.setUser(user);
 		product.setPhotoKey(generateKey(name));

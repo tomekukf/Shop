@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="../../static/css/materia/bootstrap.min.css"
 	th:href="@{static/css/materia/bootstrap.min.css}" />
 <!-- <script type="text/javascript" th:href="@{bootstrap/3.3.7/js/bootstrap.min.js}"></script> -->
-<script type="text/javascript"
-	th:href="@{jquery/3.1.1/js/jquery.min.js}"></script>
+ <script th:src="@{webjars/jquery/jquery.min.js}"></script>
+  <script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
 	<div th:replace="fragments/header1 :: header">...</div>
@@ -55,8 +55,6 @@
 
 
 	<div class="container" th:replace="fragments/footer :: footer">...</div>
-	<script th:src="@{/jquery/jquery/3.2.1.min.js}"></script>
-	<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
 
 </body>
 </html>
