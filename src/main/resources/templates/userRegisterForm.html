@@ -1,44 +1,97 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"  th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css"  />
-<link rel="stylesheet"  th:href="@{/syles.css}" />
-<link >
+<!-- <link rel="stylesheet" th:href="@{/css/allStyles/bootstrap.min.css}" -->
+<!-- 	href="../static/css/allStyles/bootstrap.min.css" /> -->
+<link rel="stylesheet" th:href="@{static/css/materia/bootstrap.min.css}"
+	href="../static/css/materia/bootstrap.min.css" />
 
-
+<!-- <link href="../static/css/allStyles/bootstrap.min.css" rel="stylesheet" /> -->
+<script type="text/javascript"
+	th:href="@{bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script type="text/javascript"
+	th:href="@{jquery/3.1.1/js/jquery.min.js}"></script>
 </head>
+
+
+
 <body>
-<h1>Registration form</h1>
-<div class="container col-lg-pull-11">
-	<div class="" th:replace="fragments/header :: header">...</div>
-	<div class="myOwn">
-	<h1 class="alert">siiema</h1></div>
-	
-<div   class=" container form-group">
-<form class=" " action="#" method="post" th:action="@{/register}" th:object="${user}">
-<input class="" th:field="*{name}" placeholder="Name">
-<br>
-<br>
-<input class="" th:field="*{surname}" placeholder="Surname">
-
-<p th:errors="*{username}">Username Error</p>
-<input th:field="*{username}" placeholder="Username" >
-<p th:errors="*{email}">Email Error</p>
-<input type="email" th:field="*{email}" placeholder="Email">
-<p th:errors="*{password}">Password Error</p>
-<input type="password" th:field="*{password}" placeholder="password"><br><br>
-<input type="submit" value="Send">
-</form>
-</div>
 
 
+	<div class="position-fixed" th:replace="fragments/header1 :: header">Header</div>
 
 
-<div class="container" th:replace="fragments/footer :: footer">...</div>
-</div>
-<script src="/jquery/jquery/3.2.1.min.js"></script>    
-<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
+	<h1 class="text-center p-4 ">Registration form</h1>
+	<div class="container  small">
+
+		<div class="alert alert-info" th:if="${message}" >
+		<h3 class="text-center">User with that email is allready registred</h3>
+		</div>
+		<div class="alert alert-info" th:if="${registerMessage}" >
+		<h3 class="text-center" th:text="${registerMessage}"></h3>
+		</div>
+		<div class=" form-group">
+			<form class=" w-50 popover-body " action="#" method="post" th:action="@{/register}"
+				th:object="${user}">
+
+
+				<div class="form-group ">
+					<label for="email" class="form-control">Email</label> <input
+						type="text" class="form-control" th:field="*{email}" id="email" />
+					<div class="text-lg-left text-danger"
+						th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+				</div>
+
+				<div class="form-group">
+					<label for="name" class="form-control">Name</label> <input
+						class="form-control" type="text" th:field="*{name}" id="name">
+					<div class="text-lg-left text-danger"
+						th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="surname" class="form-control">Surname</label> <input
+						class="form-control" type="text" th:field="*{surname}"
+						id="surname">
+					<div class="text-lg-left text-danger"
+						th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="username" class="form-control">Username</label> <input
+						class="form-control" type="text" th:field="*{username}"
+						id="username">
+					<div class="text-lg-left text-danger"
+						th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="password" class="form-control">Password</label> <input
+						class="form-control" type="password" th:field="*{password}"
+						id="password">
+					<div class="text-lg-left text-danger"
+						th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+
+				</div>
+
+				<input type="submit" class="btn btn-primary" value="Register!">
+
+			</form>
+		</div>
+
+
+
+
+
+	</div>
+	<div class="container" th:replace="fragments/footer :: footer">...</div>
+
+	<script th:src="@{/jquery/jquery/3.2.1.min.js}"></script>
+	<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
 </body>
 </html>

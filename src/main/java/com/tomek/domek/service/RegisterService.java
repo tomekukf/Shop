@@ -1,6 +1,10 @@
 package com.tomek.domek.service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tomek.domek.model.User;
@@ -32,13 +36,35 @@ public class RegisterService {
 	}
 
 	
+	
+	
+	
+	public void createUser(User user) {
+		BCryptPasswordEncoder  encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(user.getPassword()));
+		UserRole role = new UserRole("USER","adding products");
+		Set<UserRole> roles= userRoleRepo.findByRole("USER");
+		user.setRoles(roles);
+		userRepo.save(user);
+		
+	}
+	public void createAdmin(User user) {
+		BCryptPasswordEncoder  encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(user.getPassword()));
+		UserRole role = new UserRole("ADMIN","adding products,editing user posts");
+		Set<UserRole> roles= new HashSet<>();
+		roles.add(role);
+		user.setRoles(roles);
+		userRepo.save(user);
+		
+	}
 
 	
-	public void registerNewUser(User user) {
-		UserRole role = userRoleRepo.findByRole(defaultRole);
-		user.getRoles().add(role);
-		userRepo.save(user);
-	}
-	
+//	public void registerNewUser(User user) {
+//		UserRole role = userRoleRepo.findByRole(defaultRole);
+//		user.getRoles().add(role);
+//		userRepo.save(user);
+//	}
+//	
 	
 }

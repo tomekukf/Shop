@@ -1,6 +1,5 @@
 package com.tomek.domek.model;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -28,12 +27,11 @@ public class User {
 	private Long id;
 
 	@NotEmpty
+//	@Column(unique=true)
 	private String username;
 
 	private String name;
 	private String surname;
-
-	
 
 	@NotNull
 	@Size(min = 5)
@@ -41,18 +39,17 @@ public class User {
 
 	@NotNull
 	@Email
-	@Column(unique=true)
+	@Column
 	private String email;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="USER_ROLES", joinColumns= {@JoinColumn(name="USER_ID", referencedColumnName="id")}, 
-	inverseJoinColumns= {@JoinColumn(name="ROLE_ID",referencedColumnName="id")})
-	private Set<UserRole> roles = new HashSet<>();
+	@JoinTable(name = "USER_ROLES", joinColumns = {
+			@JoinColumn(name = "USER_ID", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "ROLE_ID", referencedColumnName = "id") })
+	private Set<UserRole> roles ;
 
-	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Product> products;
-
-	
 
 	public User(@NotNull String username, String name, String surname, @NotNull String password,
 			@NotNull String email) {
@@ -63,6 +60,7 @@ public class User {
 		this.password = password;
 		this.email = email;
 	}
+
 	public User(@NotEmpty String username, String name, String surname, @NotNull @Size(min = 5) String password,
 			@NotNull @Email String email, List<Product> products) {
 		super();
@@ -85,9 +83,24 @@ public class User {
 		this.roles = roles;
 		this.products = products;
 	}
+	
+	
+
+	public User( String username,  String email) {
+		this.username = username;
+		this.email = email;
+	}
+
 	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	}
+
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -137,6 +150,7 @@ public class User {
 	public void setRoles(Set<UserRole> roles) {
 		this.roles = roles;
 	}
+
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -149,5 +163,10 @@ public class User {
 	public String toString() {
 		return username;
 	}
+
+
+
+	
+	
 
 }

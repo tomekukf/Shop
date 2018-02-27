@@ -24,7 +24,9 @@ public class ShopApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		productRepository.save(new Product("Sukienka", "HM", 99.0, "opis", null,  new Photo("_DSC0444.jpg",  null, null), "_DSC0444.jpg"));
+//		productRepository.save(new Product("Sukienka", "HM", 99.0, "opis", null,  new Photo("_DSC0444.jpg",  null, null), "_DSC0444.jpg"));
+//		productRepository.save(new Product("Spodnie", "HM", 99.0, "opis", null,  new Photo("_DSC0444.jpg",  null, null), "_DSC0444.jpg"));
+//		productRepository.save(new Product("Sukienka", "Reserved", 99.0, "opis", null,  new Photo("_DSC0444.jpg",  null, null), "_DSC0444.jpg"));
 	}
 
 }

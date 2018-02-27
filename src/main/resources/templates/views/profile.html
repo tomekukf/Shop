@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Profile Page </title>
+<link rel="stylesheet" th:href="@{static/css/materia/bootstrap.min.css}" href="../../static/css/materia/bootstrap.min.css" />
+<link rel="stylesheet" href="../../static/css/Own/styles.css"
+	th:href="@{static/css/Own/styles.css}" />
+</head>
+<body>
+<div th:replace="fragments/header1 :: header">...</div>
+
+	
+<div class="container paddingTopProfiles">
+
+<h1 class="container text-center p-5 ">Your products</h1>
+</div>
+	<div class="card container p-1 ">
+		<div class="card card-body">
+			<table class="table table-hover" th:object="${product}">
+				<thead>
+					<tr>
+						<th>Photo</th>
+						<th>Brand</th>
+						<th>Category</th>
+						<th>Description</th>
+						<th>Price</th>
+						<th>Date</th>
+						<th></th>
+						<tH></tH>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product : ${products}" th:object="${product}">
+						<td align="center"><a
+							th:href="@{/lol/{photoID}/lol(photoID=${product.adress})}"> <img alt="Image"
+								th:src="@{/lol/{photoID}/lol(photoID=${product.adress})}" width="100" height="100"
+								align="middle" />
+						</a></td>
+						<td th:text="*{category}">Category</td>
+						<td th:text="*{brand}">Brand</td>
+							<td th:text="*{description}">Description</td>
+						<td th:text="*{price}">Price</td>
+					
+						<td th:text="*{date}">Date</td>
+						<td> <a th:href="@{updateProduct}" class="btn btn-primary  btn-group m-1">Edit</a> 
+						 <a th:href="@{deleteProduct}" class="btn btn-primary btn-group">Delete</a> </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+
+
+	<!-- <td><a th:href="@{|/users/${product.user}|}" -->
+	<!-- 							th:text="*{user}">UserID</a>   </td> -->
+
+
+	<div class="container" th:replace="fragments/footer :: footer">...</div>
+	<script th:src="@{/jquery/jquery/3.2.1.min.js}"></script>
+	<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
+
+
+
+
+	<script th:src="@{/jquery/jquery/3.2.1.min.js}"></script>    
+<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
+</body>
+</html>

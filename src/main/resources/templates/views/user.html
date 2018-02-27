@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Shop application</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../../static/css/Own/styles.css"
+	th:href="@{static/css/Own/styles.css}" />
+<link rel="stylesheet" href="../../static/css/materia/bootstrap.min.css"
+	th:href="@{static/css/materia/bootstrap.min.css}" />
+<!-- <script type="text/javascript" th:href="@{bootstrap/3.3.7/js/bootstrap.min.js}"></script> -->
+<script type="text/javascript"
+	th:href="@{jquery/3.1.1/js/jquery.min.js}"></script>
+</head>
+<body>
+	<div th:replace="fragments/header1 :: header">...</div>
+
+	
+
+
+	<div class="card">
+		<div class="card card-body">
+			<table class="table table-hover" th:object="${user}">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Email</th>
+						<th>Add</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user:${user}" th:object="${user}">
+						<td th:text="*{username}"></td>
+						<td th:text="*{email}"></td>
+						<td><a th:href="@{/sendMessage}" class="btn btn-primary">Send Message</a></td>
+						<td align="center"><a
+							th:href="@{/users/{userProducts}/users(userProducts=${user})}"> <img alt="Image"
+								th:src="@{/users/{userProducts}/users(userProducts=${user})}" width="100" height="100"
+								align="middle" />
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+
+
+	<!-- <td><a th:href="@{|/users/${product.user}|}" -->
+	<!-- 							th:text="*{user}">UserID</a>   </td> -->
+
+
+	<div class="container" th:replace="fragments/footer :: footer">...</div>
+	<script th:src="@{/jquery/jquery/3.2.1.min.js}"></script>
+	<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
+
+</body>
+</html>

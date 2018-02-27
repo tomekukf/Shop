@@ -5,7 +5,10 @@
 <title>Header</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet"  href="../../static/css/allStyles/bootstrap.min.css" th:href="@{/css/allStyles/bootstrap.min.css}" />
+<script type="text/javascript" th:href="@{bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:href="@{jquery/3.1.1/js/jquery.min.js}"></script>
+
 
 </head>
 <body>
@@ -16,9 +19,8 @@
 					th:src="@{/photos/zebra.jpg}" align="left" border="1px"
 					width="50px" height="50" />
 				</a>
-				<!-- 			<img src="../static/photos/zebra.jpg" align="left" border="1px" width="100px" height=""/> -->
 
-				<div class="collapse navbar-collapse navCollapse">
+				<div class="collapse navbar-collapse ">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a th:href="@{/addProduct}">Dodaj produkt </a></li>
 						<li><a href="#">Zaloguj się!</a></li>
@@ -34,7 +36,8 @@
 		</nav>
 
 	</div>
-<script src="/jquery/jquery/3.2.1.min.js"></script>    
+	
+<script th:src="@{/jquery/jquery/3.2.1.min.js}"></script>    
 <script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
 
 </body>

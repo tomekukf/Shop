@@ -3,72 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"  th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{static/css/materia/bootstrap.min.css}"
+	href="../static/css/materia/bootstrap.min.css" />
+<link rel="stylesheet" href="../static/css/Own/styles.css"
+	th:href="@{static/css/Own/styles.css}">
 </head>
+
 <body>
-	<div th:replace="fragments/header :: header">Header</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<div class="container form-group-sm">
-		<form action="#" method="post" th:object="${product}"
-			th:action="@{/addProduct}" enctype="multipart/form-data">
-			<p th:errors="*{category}">Category error</p>
 
-<!-- 			Category : <input type="text" th:field="*{name}" /> -->
-			
-			<p> Category: 
-			 <select
-				th:field="*{category}">
-				<option th:each="dropdownValue: ${categoryValues}"
-					th:value="${dropdownValue}" 
-					th:text="${dropdownValue}">
-					</option>
-			</select></p> <br>
+	<div th:replace="fragments/header1 :: header">Header</div>
 
-			<p>
-				<br> Brand : <select th:field="*{brand}">
-				<option th:each="brandVal : ${brandValues}"
-				th:value="${brandVal}"	
-				th:text="${brandVal}">
-				
-				</option>
-				
-				</select>
-			</p>
-			<p th:errors="*{price}">Price Errors Error</p>
-			<p>
-				Price : <input type="number" th:field="*{price}" />
-			</p>
+	<div class=" container paddingTop">
+		<h1 class="text-center p-4 text-justify">Add Product</h1>
+		<div class="container  small">
 
-			<p>
-				Description : <input type="text" th:field="*{description}" />
-			</p>
+			<div
+				class=" form-group border border-dark m-2 p-2 paddingTopandRight">
+							<form class=" w-50 popover-body " action="#" method="post"
+								th:action="@{/addProduct}" th:object="${product}" enctype="multipart/form-data">
 
-			<p>
-				Photo : <input type="file" name="file" />
-			</p>
-			<br>
+				<!-- 				<form action="#" method="post" th:object="${product}"
+				 -->
+				<!-- 			th:action="@{/addProduct}" enctype="multipart/form-data">
+				 -->
 
-			<p>
-				<input type="submit" value="addProduct" />
-			</p>
-			<br> <br>
+								<div class="form-group ">
+									<label for="brand" class="form-control">Brand</label> <select
+										class="list-group" th:field="*{brand}">
+										<option id="brand" class="list-group-item" th:each="brandVal : ${brandValues}"
+											th:value="${brandVal}" th:text="${brandVal}"></option>
+									</select>
+								</div>
+								<div class="form-group ">
+									<label for="category" class="form-control">Category</label> <select
+										th:field="*{category}">
+										<option id="category"  class="form-control-range" th:each="dropdownValue: ${categoryValues}"
+											th:value="${dropdownValue}" th:text="${dropdownValue}">
+										</option>
+										</select>
+										<div class="text-lg-left text-danger"
+										th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+									
+								</div>
 
 
 
 
-		</form>
-		<br>
+								<div class="form-group">
+									<label for="price" class="form-control">Price</label> <input
+										class="form-control" type="number" th:field="*{price}" id="price">
+									<div class="text-lg-left text-danger"
+										th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+
+								</div>
+
+								<div class="form-group">
+									<label for="description" class="form-control">Description</label> <input
+										class="form-control" type="text" th:field="*{description}"
+										id="description">
+									<div class="text-lg-left text-danger"
+										th:if="${#fields.hasErrors('description')}"
+										th:errors="*{description}"></div>
+
+								</div>
+
+								<div class="form-group">
+									<label for="file" class="form-control">Photo</label> <input
+										class="form-control-file " name="file" type="file" id="file">
+								</div>
+
+
+
+								<input type="submit" class="btn btn-primary" value="Add Product!">
+
+							</form>
+<!-- 				<form action="#" method="post" th:object="${product}" -->
+<!-- 					th:action="@{/addProduct}" enctype="multipart/form-data"> -->
+<!-- 					<p th:errors="*{category}">Category error</p> -->
+
+<!-- 								Category : <input type="text" th:field="*{name}" /> -->
+
+<!-- 					<p> -->
+<!-- 						Category: <select th:field="*{category}"> -->
+<!-- 							<option th:each="dropdownValue: ${categoryValues}" -->
+<!-- 								th:value="${dropdownValue}" th:text="${dropdownValue}"> -->
+<!-- 							</option> -->
+<!-- 						</select> -->
+<!-- 					</p> -->
+<!-- 					<br> -->
+
+<!-- 					<p> -->
+<!-- 						<br> Brand : <select th:field="*{brand}"> -->
+<!-- 							<option th:each="brandVal : ${brandValues}" -->
+<!-- 								th:value="${brandVal}" th:text="${brandVal}"></option> -->
+
+<!-- 						</select> -->
+<!-- 					</p> -->
+<!-- 					<p th:errors="*{price}">Price Errors Error</p> -->
+<!-- 					<p> -->
+<!-- 						Price : <input type="number" th:field="*{price}" /> -->
+<!-- 					</p> -->
+
+<!-- 					<p> -->
+<!-- 						Description : <input type="text" th:field="*{description}" /> -->
+<!-- 					</p> -->
+
+<!-- 					<p> -->
+<!-- 						Photo : <input type="file" name="file" /> -->
+<!-- 					</p> -->
+<!-- 					<br> -->
+
+<!-- 					<p> -->
+<!-- 						<input type="submit" value="addProduct" /> -->
+<!-- 					</p> -->
+<!-- 					<br> <br> -->
+
+
+
+
+<!-- 				</form> -->
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+		<a th:href="@{/}">Home page</a>
+		<div th:replace="fragments/footer :: footer">...</div>
 	</div>
-	<a th:href="@{/}">Home page</a>
-	<div th:replace="fragments/footer :: footer">...</div>
 
 	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+	<script th:src="@{resources/js/bootstrap.js}"></script>
 
 
 </body>

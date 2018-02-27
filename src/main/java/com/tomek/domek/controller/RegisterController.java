@@ -12,11 +12,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tomek.domek.model.User;
 import com.tomek.domek.service.RegisterService;
+import com.tomek.domek.service.UserService;
 
 @Controller
 public class RegisterController {
 
 	private RegisterService registerService;
+
+	private UserService userService;
+
+	@Autowired
+	public void setRegisterService(RegisterService registerService, UserService userService) {
+		this.registerService = registerService;
+		this.userService = userService;
+	}
 
 	@GetMapping("/register")
 	public String register(Model model) {
@@ -29,18 +38,20 @@ public class RegisterController {
 
 		if (results.hasErrors()) {
 			return "userRegisterForm";
-		} else {
-			registerService.registerNewUser(user);
-			model.addAttribute("registerMessage", "Registartion waws successful");
 		}
 
-		return "redirect:/";
+		if (userService.isUserPresent(user.getEmail())) {
+			model.addAttribute("message", true);
 
-	}
+			return "userRegisterForm";
+		}
+		
+		registerService.createUser(user);
 
-	@Autowired
-	public void setRegisterService(RegisterService registerService) {
-		this.registerService = registerService;
+		model.addAttribute("registerMessage", "Registartion was successful");
+
+		return "userRegisterForm";
+
 	}
 
 }

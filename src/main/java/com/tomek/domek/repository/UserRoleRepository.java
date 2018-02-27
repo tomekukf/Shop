@@ -1,5 +1,7 @@
 package com.tomek.domek.repository;
 
+import java.util.Set;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tomek.domek.model.UserRole;
@@ -7,5 +9,5 @@ import com.tomek.domek.model.UserRole;
 public interface UserRoleRepository extends JpaRepository<UserRole, Long> {
 
 	
-	 UserRole findByRole(String role);
+	 Set<UserRole> findByRole(String role);
 }

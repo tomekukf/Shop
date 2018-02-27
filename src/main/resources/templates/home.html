@@ -1,84 +1,86 @@
+
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Shop application</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"  type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" href="../static/css/Own/styles.css"
+	th:href="@{static/css/Own/styles.css}" />
+<link rel="stylesheet" href="../static/css/materia/bootstrap.min.css"
+	th:href="@{static/css/materia/bootstrap.min.css}" />
+<!-- <script type="text/javascript" th:href="@{bootstrap/3.3.7/js/bootstrap.min.js}"></script> -->
+<script type="text/javascript"
+	th:href="@{jquery/3.1.1/js/jquery.min.js}"></script>
 </head>
 <body>
-<div>
-
-</div>
-	<div th:replace="fragments/header :: header">...</div>
-	<br>
-	<div>
-		<h2 th:if="${registerMessage}" th:text="${registerMessage}"></h2>
-	</div>
-	<div th:if="${message}">
-		<h2 th:text="${message}" /></h2>
-	</div>
-	<br>
-	<br>
-	
+	<div th:replace="fragments/header1 :: header">...</div>
 
 
+		<br>
+		<div>
+			<h2 class="alert-heading" th:if="${registerMessage}"
+				th:text="${registerMessage}"></h2>
+		</div>
+		<div th:if="${message}">
+			<h2 th:text="${message}" /></h2>
+		</div>
+		<br> <br> <br>
+		<h1 class="container ">All products in shop</h1>
+		
+		<div class="mySpace" >
+			<div class="card card-body"> 
+				<table class="table table-hover">
+					<tr>
+						<th>Photo</th>
+						<th>Category</th>
+						<th>Brand</th>
+						<th>Price</th>
+						<th>Description</th>
+						<th>Date</th>
+						<th>User</th>
+						<th></th>
+					</tr>
+					<tr th:each="product : ${products}" th:object="${product}">
+						<td align="center"><a
+							th:href="@{/lol/{photoID}/lol(photoID=${product.adress})}"> <img alt="Image"
+								th:src="@{/lol/{photoID}/lol(photoID=${product.adress})}" width="100" height="100"
+								align="middle" />
+						</a></td>
+						<td th:text="*{category}"></td>
+						<td th:text="*{brand}">Brand</td>
+						<td th:text="*{price}">Price</td>
+						<td th:text="*{description}">Description</td>
+						<td th:text="*{date}">Date</td>
+						<td><a th:href="@{|/users/${product.user}|}"
+							th:text="*{user}">UserID</a>   </td>
+							<td><a href="" class="btn btn-dark">Send message</a></td>
 
-
-	<br>
-	<h1 class="container ">All products in shop</h1>
-	<div class="container">
-
-		<table class="table table-bordered tab-content" cellpadding="12">
-			<tr>
-				<th>Photo</th>
-				<th>Category</th>
-				<th>Brand</th>
-				<th>Price</th>
-				<th>Description</th>
-				<th>User</th>
-
-
-
-			</tr>
-			<tr th:each="product : ${products}" th:object="${product}">
-				<td align="center"><a th:href="@{/{id}(id=${product.adress})}">
-						<img alt="Image" th:src="@{/{id}(id=${product.adress})}"
-						width="100" height="100" align="middle" />
-				</a></td>
-				<td th:text="*{category}"></td>
-				<td th:text="*{brand}">Brand</td>
-				<td th:text="*{price}">Price</td>
-				<td th:text="*{description}">Description</td>
-				<td><a th:href="@{|/users/${product.user}|}" th:text="*{user}">UserID</a></td>
-
-			</tr>
+					</tr>
 
 
 
-		</table>
- 	
-		<ul class="nav nav-pills">
-			<li class="nav-tabs"
-				th:each=" number : ${#numbers.sequence(0,products.totalPages-1)}">
-				<a th:href="@{/(page=${number})}" th:text="${number}" class="nav-link"
-				th:classappend="${currentPage}==${number}?'active':''"
-				></a>
+				</table>
 
-			</li>
+				<ul class="nav nav-pills">
+					<li class="pagination pagination-sm form-inline p-2"
+						th:each=" number : ${#numbers.sequence(0,products.totalPages-1)}">
+						<a th:href="@{/(page=${number})}" th:text="${number}"
+						class="nav-tabs"
+						th:classappend="${currentPage}==${number}?'active':''"></a>
 
-		</ul>
+					</li>
 
-	</div>
-	<br>
-	<Br>
+				</ul>
 
-	<br>
+			</div>
+			<br> <Br> <br>
 
-	<div class="container" th:replace="fragments/footer :: footer">...</div>
+			<div class="container" th:replace="fragments/footer :: footer">...</div>
 
-	<script src="/jquery/jquery/3.2.1.min.js"></script>    
-<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
+		</div>
+		<script th:src="@{/jquery/jquery/3.2.1.min.js}"></script>
+		<script th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"></script>
 </body>
 <!-- <form action="#" method="post" th:action="@{/register}">
 <input type="submit" value="Register">

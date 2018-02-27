@@ -1,7 +1,8 @@
 package com.tomek.domek.controller;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tomek.domek.model.Product;
 import com.tomek.domek.model.User;
 import com.tomek.domek.repository.PhotoRepository;
 import com.tomek.domek.repository.ProductRepository;
@@ -43,33 +45,27 @@ public class HomeController {
 	private ServletContext servletContext;
 	@Autowired
 	private PhotoRepository photoRepository;
-	
+
 	@Autowired
 	private ProductRepository productRepo;
-	
-	
 
 	@RequestMapping("/")
-	public String getHome(Model model,
-			@RequestParam(defaultValue="0")int page,
-			@RequestParam(defaultValue="5")int size,
-			
+	public String getHome(Model model, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "5") int size,
+
 			@ModelAttribute("message") String message) {
 		model.addAttribute("products", productRepo.findAll(PageRequest.of(page, size)));
 		model.addAttribute("currentPage", page);
 		return "home";
 	}
-	
-	
-	
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-	public @ResponseBody ResponseEntity<byte[]> getImageAsResponseEntity(@PathVariable String id) throws IOException {
+	@RequestMapping(value = "/lol/{photoID}/lol", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public @ResponseBody ResponseEntity<byte[]> getImageAsResponseEntity(@PathVariable String photoID)
+			throws IOException {
+		System.out.println(photoID+"lolllll");
+		byte[] media = photoService.getPhotoFromDB(photoID);
 
-		byte[] media = photoService.getPhotoFromDB(id);
-
-		
-//		File nowe = new File("0_czapka.jpg");
+		// File nowe = new File("0_czapka.jpg");
 		HttpHeaders headers = new HttpHeaders();
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 
@@ -77,9 +73,27 @@ public class HomeController {
 		return responseEntity;
 	}
 
-	
-	
-	
+	@RequestMapping(value = "/users/{userProducts}/users", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public @ResponseBody ResponseEntity<byte[]> getImageAsResponseEntityy(@ModelAttribute User userProducts)
+			throws IOException {
+
+		List<Product> list = userProducts.getProducts();
+		System.out.println(list);
+		for (Product product : list) {
+			System.out.println(product);
+		}
+//		Optional<Product> product = productService.findByUserid(userProducts);
+//		List<Product> product = productService.findByUserid(userProducts);
+		String  pathname="3_czapka.jpg";
+		byte[] photo = photoService.getPhotoFromDB(pathname);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+
+		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(photo, headers, HttpStatus.OK);
+		return responseEntity;
+	}
+
 	@ResponseBody
 	@GetMapping("/users/{user}")
 	public String showUser(@PathVariable String user, Model model) {
@@ -89,23 +103,24 @@ public class HomeController {
 
 		return "messae" + user1;
 	}
-	
+
 	@RequestMapping("/orderByPrice")
 	public String getAllOrderByPrice(Model model, @ModelAttribute("message") String message) {
-		model.addAttribute("products", productService.getAllAndOrderByPrice());
+		model.addAttribute("products", productRepo.findAllByOrderByBrandAsc());
 		return "home";
 	}
+
 	@RequestMapping("/orderByBrand")
 	public String getAllOrderByBrand(Model model, @ModelAttribute("message") String message) {
 		model.addAttribute("products", productService.getAllAndOrderByBrand());
 		return "home";
 	}
-	
+
 	@RequestMapping("/test")
 	public String test(Model model) {
-		
+
 		return "test";
-		
+
 	}
 
 }
