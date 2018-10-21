@@ -58,7 +58,6 @@ public class UserRole  implements Serializable{
 
 	public UserRole() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public List<User> getUsers() {
 		return users;

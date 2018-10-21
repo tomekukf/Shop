@@ -28,7 +28,6 @@ public class Photo {
 
 	public Photo() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {

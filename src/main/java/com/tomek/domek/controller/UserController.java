@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tomek.domek.model.User;
-import com.tomek.domek.repository.UserRepository;
 import com.tomek.domek.service.UserService;
 
 @Controller
@@ -18,8 +17,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private UserRepository userRepo;
+//	@Autowired
+//	private UserRepository userRepo;
 
 
 	@GetMapping("/findUser")

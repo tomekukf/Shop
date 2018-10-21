@@ -23,6 +23,11 @@ import javax.validation.constraints.Size;
 @Entity
 public class User  implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long id;

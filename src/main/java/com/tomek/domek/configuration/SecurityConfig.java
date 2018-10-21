@@ -32,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		// TODO Auto-generated method stub
 		return new BCryptPasswordEncoder();
 	}
 
@@ -41,7 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/register","/","/login","/static/css/**","/css/**","/webjars/**","/photos/**","/lol/**").permitAll()
+		http.authorizeRequests().antMatchers("/register","/forgotPassword","/user/resetPassword","/user/changePassword","/","/login","/static/css/**","/css/**","/webjars/**","/photos/**","/lol/**").permitAll()
+		.and().authorizeRequests().antMatchers("/user/updatePassword*",
+                "/user/savePassword*",
+                "/updatePassword*").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
 		.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
 		.defaultSuccessUrl("/profile").and().logout().logoutSuccessUrl("/login");
 	}

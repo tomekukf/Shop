@@ -55,7 +55,7 @@
 						<td th:text="*{date}">Date</td>
 						<td><a th:href="@{|/users/${product.user}|}"
 							th:text="*{user}">UserID</a>   </td>
-							<td><a href="" class="btn btn-dark">Send message</a></td>
+							<td><a th:href="@{/chatt}" class="btn btn-dark">Send message</a></td>
 
 					</tr>
 

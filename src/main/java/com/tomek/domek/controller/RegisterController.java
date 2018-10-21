@@ -2,6 +2,7 @@ package com.tomek.domek.controller;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ public class RegisterController {
 	private RegisterService registerService;
 
 	private UserService userService;
+	private Logger logger = org.slf4j.LoggerFactory.getLogger(RegisterService.class);
 
 	@Autowired
 	public void setRegisterService(RegisterService registerService, UserService userService) {
@@ -32,6 +34,10 @@ public class RegisterController {
 		model.addAttribute("user", new User());
 		return "userRegisterForm";
 	}
+//	@GetMapping("/forgotPassword")
+//	public String forgotPassword() {
+//		return "forgotPassword";
+//	}
 
 	@PostMapping("/register")
 	public String RegisterNewUser(Model model, @ModelAttribute @Valid User user, BindingResult results) {
@@ -42,11 +48,13 @@ public class RegisterController {
 
 		if (userService.isUserPresent(user.getEmail())) {
 			model.addAttribute("message", true);
-
+			logger.info("checking if some user is registred with email" + user.getEmail());
+			logger.info("email is used allready");
 			return "userRegisterForm";
 		}
 		
 		registerService.createUser(user);
+		logger.info("tworze ziomka mimo wsprawdzenia");
 
 		model.addAttribute("registerMessage", "Registartion was successful");
 

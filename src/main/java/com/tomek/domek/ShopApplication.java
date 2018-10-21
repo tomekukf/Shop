@@ -1,21 +1,23 @@
 package com.tomek.domek;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-
-import com.tomek.domek.model.Photo;
-import com.tomek.domek.model.Product;
-import com.tomek.domek.repository.ProductRepository;
 
 @SpringBootApplication
 public class ShopApplication  {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(ShopApplication.class, args);
-
+		 SpringApplication.run(ShopApplication.class, args);
+		  
+//		 String[] list = context.getBeanDefinitionNames();
+//		  for( int i=0; i<10;i++) {
+//			  System.out.println(list[i]);
+//			  
+//			  
+//		  }
+////		  for(String name : context.getBeanDefinitionNames()) {
+//		  System.out.println(name);
+//		  }
 	}}
 
 //	@Autowired

@@ -1,6 +1,5 @@
 package com.tomek.domek.service;
 
-import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,14 +12,13 @@ import org.springframework.stereotype.Service;
 import com.tomek.domek.model.Photo;
 import com.tomek.domek.model.Product;
 import com.tomek.domek.model.User;
-import com.tomek.domek.repository.PhotoRepository;
 import com.tomek.domek.repository.ProductRepository;
 import com.tomek.domek.repository.UserRepository;
 
 @Service
 public class ProductService {
 
-	private static final String defaultUser = "tomi";
+//	private static final String defaultUser = "tomi";
 
 	@Autowired
 	private ProductRepository productRepo;
@@ -28,8 +26,8 @@ public class ProductService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private PhotoRepository photoRepository;
+//	@Autowired
+//	private PhotoRepository photoRepository;
 
 	public String photoAdress;
 

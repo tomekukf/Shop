@@ -1,5 +1,6 @@
 package com.tomek.domek.configuration;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -15,6 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**","/webjars/**","/css/**","/photos/**","/css/allStyles/**","/css/materia/**","/static/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
 	}
+	
 	
 	
 //	@Bean
